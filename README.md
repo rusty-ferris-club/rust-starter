@@ -31,7 +31,7 @@ runner.rs    <-- implement some logic here
 ```
 
 _simplified_ - CLI only. copy `default.rs` into `bumblefoot.rs`, then rename into `main.rs` and put under `src/` and delete the rest.
-or `git checkout simplified`
+or `git checkout simplified`. Then, fix imports and namespacing for the commands in `main.rs`, and remove subcommand support.
 
 ```
 main.rs       <-- main CLI routing logic + default command
