@@ -1,4 +1,5 @@
 mod cmd;
+use anyhow::anyhow;
 use console::style;
 use std::process::exit;
 
@@ -24,7 +25,7 @@ fn main() {
         );
     }
     let res = match matches.subcommand() {
-        None => cmd::default::run(&matches),
+        None => Err(anyhow!("command not found")),
         Some(tup) => match tup {
             ("validate", subcommand_matches) => cmd::validate::run(&matches, subcommand_matches),
             _ => unreachable!(),

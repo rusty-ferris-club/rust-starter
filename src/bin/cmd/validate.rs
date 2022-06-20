@@ -1,4 +1,5 @@
 use anyhow::Result as AnyResult;
+use bumblefoot_lib;
 use clap::{App, Arg, ArgMatches};
 
 pub fn command() -> App<'static> {
@@ -20,5 +21,7 @@ pub fn command() -> App<'static> {
 }
 
 pub fn run(_matches: &ArgMatches, _subcommand_matches: &ArgMatches) -> AnyResult<bool> {
+    println!("going to run {}", bumblefoot_lib::CMD);
+    bumblefoot_lib::run();
     Ok(true)
 }
