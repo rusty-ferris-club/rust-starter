@@ -1,3 +1,51 @@
+<!-- remove when done -->
+<hr> 
+
+**Using the starter project:**
+
+* find where `bumblefoot` is and replace it with the name of your project.
+* This is a _dual library and binary_ project and builds both by default. If this is majorly a library, you want to build binaries selectively see more in [Cargo.toml](Cargo.toml).
+
+Compile a CLI:
+```
+$ cargo build
+```
+Compile a library:
+```
+$ cargo build --no-default-features
+```
+
+**Project structure**
+
+_default_ - CLI + lib.
+
+```
+bin/
+  cmd/
+    default.rs    <-- the 'bare' command `$ bumblefoot`
+    validate.rs   <-- `$bumblefoot validate`
+  bumblefoot.rs       <-- main CLI routing logic, add new commands here declaratively
+data.rs      <-- aka 'types.rs'
+lib.rs       <-- export some public API
+runner.rs    <-- implement some logic here
+```
+
+_simplified_ - CLI only. copy `default.rs` into `bumblefoot.rs`, then rename into `main.rs` and put under `src/` and delete the rest.
+or `git checkout simplified`
+
+```
+main.rs       <-- main CLI routing logic + default command
+data.rs      <-- aka 'types.rs'
+lib.rs       <-- export some public API
+runner.rs    <-- implement some logic here
+```
+
+
+<hr>
+<!-- /remove when done -->
+
+
+
 <p align="center">
 <br/>
 <br/>
@@ -24,22 +72,6 @@
 # :key: Bumblefoot <img src="https://github.com/jondot/bumblefoot/actions/workflows/build.yml/badge.svg"/>
 
 
-<hr> 
-
-**Using the starter project:**
-
-* find where `bumblefoot` is and replace it with the name of your project.
-* This is a _dual library and binary_ project and builds both by default. If this is majorly a library, you want to build binaries selectively see more in [Cargo.toml](Cargo.toml).
-
-Compile a CLI:
-```
-$ cargo build
-```
-Compile a library:
-```
-$ cargo build --no-default-features
-```
-<hr>
 
 # :rocket: Quick Start
 

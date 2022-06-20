@@ -1,5 +1,4 @@
 mod cmd;
-use cmd::validate;
 use console::style;
 use std::process::exit;
 
@@ -12,7 +11,7 @@ fn main() {
     let env = env_logger::Env::default().filter_or("LOG", "info");
     env_logger::init_from_env(env);
 
-    let app = cmd::default::command().subcommand(validate::command());
+    let app = cmd::default::command().subcommand(cmd::validate::command());
 
     let v = app.render_version();
     let matches = app.to_owned().get_matches();
