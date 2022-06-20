@@ -22,7 +22,7 @@ build = "build.rs"
 
 [dependencies]
 
-clap = { version = "3.0.0-beta.4", optional = true }
+clap = { version = "3.0.0-beta.4" }
 serde = "*"
 serde_json = "*"
 serde_derive = "*"
@@ -35,12 +35,3 @@ console = "*"
 [build-dependencies]
 vergen = "*"
 anyhow = "*"
-
-
-[features]
-default = ["cli"]
-cli = ["clap"]
-
-[[bin]]
-name = "bumblefoot"
-required-features = ["cli"]

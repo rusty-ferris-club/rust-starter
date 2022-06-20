@@ -1,5 +1,11 @@
+use console::style;
+use std::process::exit;
+
+pub const BANNER: &str = r#"
+    B A N N E R
+"#;
+
 use anyhow::Result as AnyResult;
-use bumblefoot_lib;
 use clap::crate_version;
 use clap::{App, Arg, ArgMatches};
 pub fn command() -> App<'static> {
@@ -43,4 +49,37 @@ pub fn run(matches: &ArgMatches) -> AnyResult<bool> {
     println!("going to run {}", bumblefoot_lib::CMD);
     bumblefoot_lib::run();
     Ok(true)
+}
+
+fn main() {
+    // just use $ LOG=1 mybin
+    let env = env_logger::Env::default().filter_or("LOG", "info");
+    env_logger::init_from_env(env);
+
+    let app = command();
+
+    let v = app.render_version();
+    let matches = app.to_owned().get_matches();
+
+    if !matches.is_present("no_banner") {
+        println!(
+            "{}\n                    {}",
+            style(BANNER).magenta(),
+            style(v).dim()
+        );
+    }
+    let res = match matches.subcommand() {
+        None => run(&matches),
+        _ => unreachable!(),
+    };
+
+    match res {
+        Ok(ok) => {
+            exit(if ok { 0 } else { 1 });
+        }
+        Err(err) => {
+            eprintln!("error: {}", err);
+            exit(1)
+        }
+    }
 }
