@@ -20,5 +20,7 @@ pub fn command() -> Command<'static> {
 }
 
 pub fn run(_matches: &ArgMatches, _subcommand_matches: &ArgMatches) -> AnyResult<bool> {
+    println!("going to run {}", bumblefoot::CMD);
+    bumblefoot::run();
     Ok(true)
 }

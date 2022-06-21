@@ -1,13 +1,12 @@
-use anyhow::Result as AnyResult;
-use bumblefoot;
 use clap::crate_version;
-use clap::{Arg, ArgMatches, Command};
+use clap::{AppSettings, Arg, Command};
 
 pub fn command() -> Command<'static> {
     Command::new("bumblefoot")
         .version(env!("VERGEN_GIT_SEMVER"))
         .version(crate_version!())
         .about("A starter project for Rust")
+        .setting(AppSettings::ArgRequiredElseHelp)
         .arg(
             Arg::new("dry_run")
                 .short('d')
@@ -37,11 +36,4 @@ pub fn command() -> Command<'static> {
                 .help("Show details about interactions")
                 .takes_value(false),
         )
-}
-
-pub fn run(matches: &ArgMatches) -> AnyResult<bool> {
-    log::info!("default cmd {:?}", matches.value_of("reporter"));
-    println!("going to run {}", bumblefoot::CMD);
-    bumblefoot::run();
-    Ok(true)
 }
