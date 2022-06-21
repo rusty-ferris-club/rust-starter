@@ -1,8 +1,8 @@
 use anyhow::Result as AnyResult;
-use clap::{App, Arg, ArgMatches};
+use clap::{Arg, ArgMatches, Command};
 
-pub fn command() -> App<'static> {
-    App::new("validate")
+pub fn command() -> Command<'static> {
+    Command::new("validate")
         .about("Validate keys")
         .arg(
             Arg::new("list")

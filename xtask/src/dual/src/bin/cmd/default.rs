@@ -1,9 +1,10 @@
 use anyhow::Result as AnyResult;
 use bumblefoot;
 use clap::crate_version;
-use clap::{App, Arg, ArgMatches};
-pub fn command() -> App<'static> {
-    App::new("bumblefoot")
+use clap::{Arg, ArgMatches, Command};
+
+pub fn command() -> Command<'static> {
+    Command::new("bumblefoot")
         .version(env!("VERGEN_GIT_SEMVER"))
         .version(crate_version!())
         .about("A starter project for Rust")
