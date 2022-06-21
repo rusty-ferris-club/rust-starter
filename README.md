@@ -3,8 +3,8 @@
 
 **Using the starter project:**
 
-* find where `bumblefoot` is and replace it with the name of your project.
-* This is a _dual library and binary_ project and builds both by default. If this is majorly a library, you want to build binaries selectively see more in [Cargo.toml](Cargo.toml).
+* find where `bumblefoot` is and replace it with the name of your project. `$ rg bumblefoot`
+* This is a _dual library and binary_ project and builds both by default.
 
 Compile a CLI:
 ```
@@ -17,7 +17,6 @@ $ cargo build --no-default-features
 
 **Project structure**
 
-_default_ - CLI + lib.
 
 ```
 bin/
@@ -30,15 +29,36 @@ lib.rs       <-- export some public API
 runner.rs    <-- implement some logic here
 ```
 
-_simplified_ - CLI only. copy `default.rs` into `bumblefoot.rs`, then rename into `main.rs` and put under `src/` and delete the rest.
-or `git checkout simplified`. Then, fix imports and namespacing for the commands in `main.rs`, and remove subcommand support.
+**Simpler structure**
+You can convert the project to be simpler and CLI only on account of power and flexibility. 
+
+* Copy the contents of `default.rs` into `bumblefoot.rs` and rename into `main.rs`.  
+* Drop `main.rs` under `src/` and delete `bin/`.
+* Remove the `[[features]]` and `[[bin]]` sections from `Cargo.toml`
+* Fix `use` issues and stale code errors in `main.rs`.
+  
+
+This should be the result:
 
 ```
-main.rs       <-- main CLI routing logic + default command
-data.rs      <-- aka 'types.rs'
-lib.rs       <-- export some public API
-runner.rs    <-- implement some logic here
+bumblefoot/
+  main.rs       <-- main CLI routing logic + default command
+  data.rs      <-- aka 'types.rs'
+  lib.rs       <-- export some public API
+  runner.rs    <-- implement some logic here
 ```
+
+**xtask**
+You have [xtask](https://github.com/matklad/cargo-xtask) preconfigured. It's a best-practice, boilerplate code that allows you to use `cargo xtask <your task>`. A kind of rust-native make.
+
+You can use it to codify any of your tasks for CI or development.
+
+In it you have two tasks preconfigured:
+
+* `dual` - convert this crate to a dual build (library and CLI)
+* `simple` - convert this crate to a simple layout
+
+These will work only when you're starting out because they apply fresh templated code. Once you start building, they'll probably not be useful anymore.
 
 
 <hr>

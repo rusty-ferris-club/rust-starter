@@ -1,14 +1,14 @@
 use anyhow::Result as AnyResult;
 use clap::crate_version;
-use clap::{App, Arg, ArgMatches};
+use clap::{Arg, ArgMatches, Command};
 use console::style;
 use std::process::exit;
 pub const BANNER: &str = r#"
     B A N N E R
 "#;
 
-pub fn command() -> App<'static> {
-    App::new("bumblefoot")
+pub fn command() -> Command<'static> {
+    Command::new("bumblefoot")
         .version(env!("VERGEN_GIT_SEMVER"))
         .version(crate_version!())
         .about("A starter project for Rust")
