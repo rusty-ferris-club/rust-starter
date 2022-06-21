@@ -7,14 +7,14 @@ pub fn command() -> App<'static> {
         .arg(
             Arg::new("list")
                 .long("list")
-                .about("Show provider list")
+                .help("Show provider list")
                 .takes_value(false),
         )
         .arg(
             Arg::new("csv_in")
                 .long("--csv-in")
                 .value_name("FILE")
-                .about("Read providers and params via CSV")
+                .help("Read providers and params via CSV")
                 .takes_value(true),
         )
 }
