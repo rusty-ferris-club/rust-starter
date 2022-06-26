@@ -1,4 +1,3 @@
-use anyhow::Result as AnyResult;
 use clap::{Arg, ArgMatches, Command};
 
 pub fn command() -> Command<'static> {

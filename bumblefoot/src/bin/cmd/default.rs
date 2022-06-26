@@ -1,4 +1,3 @@
-use anyhow::Result as AnyResult;
 use bumblefoot;
 use clap::crate_version;
 use clap::{Arg, ArgMatches, Command};
