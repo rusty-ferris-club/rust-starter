@@ -7,14 +7,16 @@ pub const BANNER: &str = r#"
 "#;
 
 fn main() {
-    // just use $ LOG=1 mybin
-    let env = env_logger::Env::default().filter_or("LOG", "info");
-    env_logger::init_from_env(env);
-
     let app = cmd::default::command().subcommand(cmd::validate::command());
 
     let v = app.render_version();
     let matches = app.to_owned().get_matches();
+
+    let env = env_logger::Env::default().filter_or(
+        "LOG",
+        matches.value_of("log").unwrap_or(log::Level::Info.as_str()),
+    );
+    env_logger::init_from_env(env);
 
     if !matches.is_present("no_banner") {
         println!(
