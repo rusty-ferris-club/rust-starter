@@ -19,6 +19,9 @@ pub fn command() -> Command<'static> {
         )
 }
 
-pub fn run(_matches: &ArgMatches, _subcommand_matches: &ArgMatches) -> AnyResult<bool> {
-    Ok(true)
+pub fn run(_matches: &ArgMatches, _subcommand_matches: &ArgMatches) -> bumblefoot::CmdExit {
+    bumblefoot::CmdExit {
+        code: exitcode::OK,
+        message: None,
+    }
 }

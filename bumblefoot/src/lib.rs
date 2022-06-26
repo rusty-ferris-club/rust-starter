@@ -1,4 +1,4 @@
 mod data;
 mod runner;
 pub use self::runner::run;
-pub use data::CMD;
+pub use data::{CmdExit, CMD};

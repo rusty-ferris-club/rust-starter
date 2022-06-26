@@ -39,9 +39,12 @@ pub fn command() -> Command<'static> {
         )
 }
 
-pub fn run(matches: &ArgMatches) -> AnyResult<bool> {
+pub fn run(matches: &ArgMatches) -> bumblefoot::CmdExit {
     log::info!("default cmd {:?}", matches.value_of("reporter"));
     println!("going to run {}", bumblefoot::CMD);
     bumblefoot::run();
-    Ok(true)
+    bumblefoot::CmdExit {
+        code: exitcode::OK,
+        message: None,
+    }
 }

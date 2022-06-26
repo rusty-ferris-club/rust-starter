@@ -1,5 +1,5 @@
 mod cmd;
-use console::style;
+use console::{style, Style};
 use std::process::exit;
 
 pub const BANNER: &str = r#"
@@ -31,13 +31,13 @@ fn main() {
         },
     };
 
-    match res {
-        Ok(ok) => {
-            exit(if ok { 0 } else { 1 });
-        }
-        Err(err) => {
-            eprintln!("error: {}", err);
-            exit(1)
-        }
+    if let Some(message) = res.message {
+        let style = if exitcode::is_success(res.code) {
+            Style::new().green()
+        } else {
+            Style::new().red()
+        };
+        eprintln!("{}", style.apply_to(message));
     }
+    exit(res.code)
 }
