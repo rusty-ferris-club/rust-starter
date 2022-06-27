@@ -45,6 +45,26 @@ fn main() -> Result<(), anyhow::Error> {
 
             Ok(())
         }
+        Some(("eject", _)) => {
+            // cargo builds and runs before eject!
+            // $ cargo xtask eject my-project
+            // or (pick what looks better and less surprising):
+            // $ cargo xtask eject --as my-project
+            // cargo builds and runs after eject!
+
+            // take param for a name
+            // name must be legal because it has to be a: file name, module name, crate name
+            // check the name in crates (if taken), ask if to proceed if it is.
+            // prompt - no going back, are you sure?
+            // rename folders
+            // rename files
+            // replace in files
+
+            // notes:
+            // omnipotent - works whether simple or dual mode, with no specific details in this task, unless we have to
+            // create variations of a name?
+            Ok(())
+        }
         Some(("vars", _)) => {
             println!("project root: {:?}", project);
             println!("root: {:?}", root);
