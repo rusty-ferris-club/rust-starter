@@ -8,7 +8,7 @@ pub struct Definitions {
     pub providers: HashMap<String, String>,
 }
 
-pub const CMD: &str = r#"hello"#;
+pub const CMD: &str = r#"validate"#;
 
 #[cfg(test)]
 mod tests {
@@ -16,6 +16,6 @@ mod tests {
 
     #[test]
     fn test_foo() {
-        assert_eq!(CMD.len(), 5);
+        assert_eq!(CMD.len(), 8);
     }
 }
