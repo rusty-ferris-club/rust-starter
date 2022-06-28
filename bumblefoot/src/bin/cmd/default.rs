@@ -1,4 +1,4 @@
-use anyhow::Result as AnyResult;
+use anyhow::Result;
 use bumblefoot;
 use clap::crate_version;
 use clap::{Arg, ArgMatches, Command};
@@ -50,9 +50,12 @@ pub fn command() -> Command<'static> {
         )
 }
 
-pub fn run(matches: &ArgMatches) -> AnyResult<bool> {
+pub fn run(matches: &ArgMatches) -> Result<bumblefoot::CmdExit> {
     log::info!("default cmd {:?}", matches.value_of("reporter"));
     println!("going to run {}", bumblefoot::CMD);
     bumblefoot::run();
-    Ok(true)
+    Ok(bumblefoot::CmdExit {
+        code: exitcode::OK,
+        message: None,
+    })
 }
