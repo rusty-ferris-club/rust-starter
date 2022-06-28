@@ -1,8 +1,8 @@
 // use anyhow::anyhow;
 // use anyhow::Result as AnyResult;
+use exitcode;
 use serde_derive::{Deserialize, Serialize};
 use std::collections::HashMap;
-use exitcode;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Definitions {
