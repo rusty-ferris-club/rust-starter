@@ -2,7 +2,7 @@
 // use anyhow::Result as AnyResult;
 use serde_derive::{Deserialize, Serialize};
 use std::collections::HashMap;
-extern crate exitcode;
+use exitcode;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Definitions {
