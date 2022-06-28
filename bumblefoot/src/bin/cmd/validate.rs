@@ -1,3 +1,4 @@
+use anyhow::Result;
 use clap::{Arg, ArgMatches, Command};
 
 pub fn command() -> Command<'static> {
@@ -18,9 +19,9 @@ pub fn command() -> Command<'static> {
         )
 }
 
-pub fn run(_matches: &ArgMatches, _subcommand_matches: &ArgMatches) -> bumblefoot::CmdExit {
-    bumblefoot::CmdExit {
+pub fn run(_matches: &ArgMatches, _subcommand_matches: &ArgMatches) -> Result<bumblefoot::CmdExit> {
+    Ok(bumblefoot::CmdExit {
         code: exitcode::OK,
         message: None,
-    }
+    })
 }
