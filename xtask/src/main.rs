@@ -5,6 +5,7 @@ use dialoguer::{theme::ColorfulTheme, Confirm};
 use fs_extra as fsx;
 use fsx::dir::CopyOptions;
 use std::path::{Path, PathBuf};
+use std::process::Command as ProcessCommand;
 
 const TEMPLATE_PROJECT_NAME: &str = "bumblefoot";
 fn main() -> Result<(), anyhow::Error> {
@@ -12,7 +13,8 @@ fn main() -> Result<(), anyhow::Error> {
         .setting(AppSettings::SubcommandRequiredElseHelp)
         .subcommand(Command::new("simple"))
         .subcommand(Command::new("dual"))
-        .subcommand(Command::new("vars"));
+        .subcommand(Command::new("vars"))
+        .subcommand(Command::new("ci"));
     let matches = cli.get_matches();
 
     let root = root_dir();
@@ -50,6 +52,12 @@ fn main() -> Result<(), anyhow::Error> {
             println!("root: {:?}", root);
             Ok(())
         }
+        Some(("ci", _)) => {
+            cargo(&["+nightly", "fmt", "--all", "--", "--check"])?;
+            cargo(&["clippy", "--", "-D", "warnings"])?;
+            cargo(&["test"])?;
+            Ok(())
+        }
         _ => unreachable!("unreachable branch"),
     };
     res
@@ -85,6 +93,15 @@ where
     opts.content_only = true;
     opts.overwrite = overwrite;
     fsx::dir::copy(from, to, &opts).map_err(anyhow::Error::msg)
+}
+
+fn cargo(args: &[&str]) -> AnyResult<()> {
+    println!("[RUN] cargo {}", &args.join(" "));
+    let mut cmd = ProcessCommand::new("cargo");
+    match cmd.args(args).status()?.success() {
+        true => Ok(()),
+        false => Err(anyhow!("[RUN] cargo command failed")),
+    }
 }
 
 fn confirm(question: &str) -> bool {
