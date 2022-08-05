@@ -1,68 +1,66 @@
-<!-- remove when done -->
+> remove when done
 <hr> 
 
-**Using the starter project:**
+## Using the starter project
 
-* find where `starter_project` is and replace it with the name of your project. `$ rg starter_project`
-* This is a _dual library and binary_ project and builds both by default.
+Use [`backpack`](https://github.com/rusty-ferris-club/backpack) to kickstart a new project:
 
-Compile a CLI:
+```
+$ bp new rusty-ferris-club/rust-starter my-project
+```
+
+Then,
+
+* Remove the crates you don't need. You can pick from:
+  * **`starter_project/`** - a full CLI with subcommands
+  * **`starter_project_simpler/`** - a CLI with a simple flat structure
+  * **`starter_project_lib/`** - a library only starter project, slim and lean
+* Update `cargo.toml` with the removed crates
+* find where `starter_project` is and replace it with the name of your project. `$ rg starter_project`, `find . | grep starter_project`.
+  
+Run build to see that you're ready to start:
+
+```
+cargo build
+```
+
+## Workflow
+### Build
 ```
 $ cargo build
 ```
-Compile a library:
-```
-$ cargo build --no-default-features
-```
-
-**Project structure**
-
+or, for full build suite with tests:
 
 ```
-bin/
-  cmd/
-    default.rs    <-- the 'bare' command `$ starter_project`
-    validate.rs   <-- `$starter_project validate`
-  starter_project.rs       <-- main CLI routing logic, add new commands here declaratively
-data.rs      <-- aka 'types.rs'
-lib.rs       <-- export some public API
-runner.rs    <-- implement some logic here
+$ cargo xtask ci
+```
+### Test
+```
+$ cargo build
 ```
 
-**Simpler structure**
-You can convert the project to be simpler and CLI only on account of power and flexibility. 
-
-* Copy the contents of `default.rs` into `starter_project.rs` and rename into `main.rs`.  
-* Drop `main.rs` under `src/` and delete `bin/`.
-* Remove the `[[features]]` and `[[bin]]` sections from `Cargo.toml`
-* Fix `use` issues and stale code errors in `main.rs`.
-  
-
-This should be the result:
-
+### Coverage
 ```
-starter_project/
-  main.rs       <-- main CLI routing logic + default command
-  data.rs      <-- aka 'types.rs'
-  lib.rs       <-- export some public API
-  runner.rs    <-- implement some logic here
+$ cargo xtask coverage [--dev]
 ```
 
-**xtask**
-You have [xtask](https://github.com/matklad/cargo-xtask) preconfigured. It's a best-practice, boilerplate code that allows you to use `cargo xtask <your task>`. A kind of rust-native make.
+### Release
 
-You can use it to codify any of your tasks for CI or development.
+Set up your [release.yml](.github/workflows/release.yml), replace the project names and repo locations.
 
-In it you have two tasks preconfigured:
+Then to release new versions:
 
-* `dual` - convert this crate to a dual build (library and CLI)
-* `simple` - convert this crate to a simple layout
+* Update [cargo.toml](starter_project/Cargo.toml) version.
+* `git tag v[your-new-version]`
+* push the new tag
 
-These will work only when you're starting out because they apply fresh templated code. Once you start building, they'll probably not be useful anymore.
+Your Github Action CI workflow should release a new version.
+
 
 
 <hr>
-<!-- /remove when done -->
+
+> /remove when done
 
 
 
