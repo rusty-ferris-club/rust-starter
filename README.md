@@ -15,14 +15,16 @@ Then,
   * **`starter_project/`** - a full CLI with subcommands
   * **`starter_project_simpler/`** - a CLI with a simple flat structure
   * **`starter_project_lib/`** - a library only starter project, slim and lean
-* Update `cargo.toml` with the removed crates
-* find where `starter_project` is and replace it with the name of your project. `$ rg starter_project`, `find . | grep starter_project`.
-  
+* Update `cargo.toml` and remove crates from workspace
+
 Run build to see that you're ready to start:
 
 ```
 cargo build
 ```
+
+* find where `starter_project` is and replace it with the name of your project. `$ rg starter_project`, `find . | grep starter_project`.
+  
 
 ## Workflow
 ### Build
