@@ -1,3 +1,6 @@
+#![allow(clippy::unnecessary_wraps)]
+#![allow(clippy::missing_const_for_fn)]
+
 mod cmd;
 use console::{style, Style};
 use std::process::exit;
@@ -11,7 +14,7 @@ fn main() {
     let app = cmd::default::command().subcommand(cmd::validate::command());
 
     let v = app.render_version();
-    let matches = app.to_owned().get_matches();
+    let matches = app.clone().get_matches();
 
     let env = env_logger::Env::default().filter_or(
         "LOG",

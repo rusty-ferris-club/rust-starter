@@ -1,0 +1,7 @@
+---
+source: starter_project_simpler/src/data.rs
+expression: "(\"one\", \"two\")"
+---
+- one
+- two
+

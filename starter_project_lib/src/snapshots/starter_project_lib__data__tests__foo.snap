@@ -1,0 +1,6 @@
+---
+source: starter_project_lib/src/data.rs
+expression: "Foobar { hey: true }"
+---
+hey: true
+

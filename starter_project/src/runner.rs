@@ -1,5 +1,5 @@
 pub fn run() {
-    println!("running!")
+    println!("running!");
 }
 
 #[cfg(test)]

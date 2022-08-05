@@ -1,10 +1,10 @@
-use anyhow::Result as AnyResult;
-use bumblefoot;
+use anyhow::Result;
 use clap::crate_version;
 use clap::{Arg, ArgMatches, Command};
+use starter_project;
 
 pub fn command() -> Command<'static> {
-    Command::new("bumblefoot")
+    Command::new("starter_project")
         .version(env!("VERGEN_GIT_SEMVER"))
         .version(crate_version!())
         .about("A starter project for Rust")
@@ -32,16 +32,30 @@ pub fn command() -> Command<'static> {
                 .takes_value(false),
         )
         .arg(
-            Arg::new("verbose")
-                .long("verbose")
-                .help("Show details about interactions")
-                .takes_value(false),
+            Arg::new("log")
+                .long("log")
+                .help("Set logging level")
+                .value_name("LEVEL")
+                .possible_values(vec![
+                    log::LevelFilter::Off.as_str(),
+                    log::LevelFilter::Trace.as_str(),
+                    log::LevelFilter::Debug.as_str(),
+                    log::LevelFilter::Info.as_str(),
+                    log::LevelFilter::Warn.as_str(),
+                    log::LevelFilter::Error.as_str(),
+                ])
+                .default_value(log::Level::Info.as_str())
+                .ignore_case(true)
+                .takes_value(true),
         )
 }
 
-pub fn run(matches: &ArgMatches) -> AnyResult<bool> {
+pub fn run(matches: &ArgMatches) -> Result<starter_project::CmdExit> {
     log::info!("default cmd {:?}", matches.value_of("reporter"));
-    println!("going to run {}", bumblefoot::CMD);
-    bumblefoot::run();
-    Ok(true)
+    println!("going to run {}", starter_project::CMD);
+    starter_project::run();
+    Ok(starter_project::CmdExit {
+        code: exitcode::OK,
+        message: None,
+    })
 }

@@ -1,5 +1,5 @@
 [package]
-name = "bumblefoot"
+name = "starter_project"
 version = "1.0.0"
 edition = "2021"
 build = "build.rs"
@@ -44,5 +44,5 @@ default = ["cli"]
 cli = ["clap"]
 
 [[bin]]
-name = "bumblefoot"
+name = "starter_project"
 required-features = ["cli"]

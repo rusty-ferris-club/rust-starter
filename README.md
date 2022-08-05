@@ -3,7 +3,7 @@
 
 **Using the starter project:**
 
-* find where `bumblefoot` is and replace it with the name of your project. `$ rg bumblefoot`
+* find where `starter_project` is and replace it with the name of your project. `$ rg starter_project`
 * This is a _dual library and binary_ project and builds both by default.
 
 Compile a CLI:
@@ -21,9 +21,9 @@ $ cargo build --no-default-features
 ```
 bin/
   cmd/
-    default.rs    <-- the 'bare' command `$ bumblefoot`
-    validate.rs   <-- `$bumblefoot validate`
-  bumblefoot.rs       <-- main CLI routing logic, add new commands here declaratively
+    default.rs    <-- the 'bare' command `$ starter_project`
+    validate.rs   <-- `$starter_project validate`
+  starter_project.rs       <-- main CLI routing logic, add new commands here declaratively
 data.rs      <-- aka 'types.rs'
 lib.rs       <-- export some public API
 runner.rs    <-- implement some logic here
@@ -32,7 +32,7 @@ runner.rs    <-- implement some logic here
 **Simpler structure**
 You can convert the project to be simpler and CLI only on account of power and flexibility. 
 
-* Copy the contents of `default.rs` into `bumblefoot.rs` and rename into `main.rs`.  
+* Copy the contents of `default.rs` into `starter_project.rs` and rename into `main.rs`.  
 * Drop `main.rs` under `src/` and delete `bin/`.
 * Remove the `[[features]]` and `[[bin]]` sections from `Cargo.toml`
 * Fix `use` issues and stale code errors in `main.rs`.
@@ -41,7 +41,7 @@ You can convert the project to be simpler and CLI only on account of power and f
 This should be the result:
 
 ```
-bumblefoot/
+starter_project/
   main.rs       <-- main CLI routing logic + default command
   data.rs      <-- aka 'types.rs'
   lib.rs       <-- export some public API
@@ -75,11 +75,11 @@ These will work only when you're starting out because they apply fresh templated
 <br/>
 </p>
 <p align="center">
-<b>:white_check_mark: bumblefoot</b>
+<b>:white_check_mark: starter_project</b>
 <br/>
-<b>:cowboy_hat_face: bumblefoot</b>
+<b>:cowboy_hat_face: starter_project</b>
 <br/>
-<b>:robot: bumblefoot</b>
+<b>:robot: starter_project</b>
 <br/>
 <hr/>
 </p>
@@ -89,26 +89,26 @@ These will work only when you're starting out because they apply fresh templated
 <img src="media/screen.png" width="920"/>
 </p>
 
-# :key: Bumblefoot <img src="https://github.com/jondot/bumblefoot/actions/workflows/build.yml/badge.svg"/>
+# :key: starter_project <img src="https://github.com/jondot/starter_project/actions/workflows/build.yml/badge.svg"/>
 
 
 
 # :rocket: Quick Start
 
-Grab a release from [releases](https://github.com/jondot/bumblefoot/releases), or install via Homebrew:
+Grab a release from [releases](https://github.com/jondot/starter_project/releases), or install via Homebrew:
 
 ```
-brew tap jondot/tap && brew install bumblefoot
+brew tap jondot/tap && brew install starter_project
 ```
 
-## Using bumblefoot
+## Using starter_project
 
 
 
 
 # Thanks
 
-To all [Contributors](https://github.com/jondot/bumblefoot/graphs/contributors) - you make this happen, thanks!
+To all [Contributors](https://github.com/jondot/starter_project/graphs/contributors) - you make this happen, thanks!
 
 
 # Copyright

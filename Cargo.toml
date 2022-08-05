@@ -1,2 +1,7 @@
 [workspace]
-members = ["bumblefoot", "xtask"]
+members = [
+  "starter_project",
+  "starter_project_simpler",
+  "starter_project_lib",
+  "xtask",
+]
