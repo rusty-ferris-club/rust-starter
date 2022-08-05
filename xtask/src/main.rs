@@ -1,4 +1,5 @@
-use anyhow::anyhow;
+#![allow(dead_code)]
+
 use anyhow::Result as AnyResult;
 use clap::{AppSettings, Arg, Command};
 use dialoguer::{theme::ColorfulTheme, Confirm};
@@ -11,12 +12,10 @@ use std::{
     path::{Path, PathBuf},
 };
 
-const TEMPLATE_PROJECT_NAME: &str = "bumblefoot";
+const TEMPLATE_PROJECT_NAME: &str = "starter_project";
 fn main() -> Result<(), anyhow::Error> {
     let cli = Command::new("xtask")
         .setting(AppSettings::SubcommandRequiredElseHelp)
-        .subcommand(Command::new("simple"))
-        .subcommand(Command::new("dual"))
         .subcommand(
             Command::new("coverage").arg(
                 Arg::new("dev")
@@ -87,33 +86,6 @@ fn main() -> Result<(), anyhow::Error> {
                     println!("report location: {}", file);
                 }
             }
-
-            Ok(())
-        }
-        Some(("simple", _)) => {
-            remove_dir(project.join("src/bin"))?;
-            if exists(project.join("src/main.rs"))
-                && !confirm("this will overwrite existing contents. continue?")
-            {
-                return Err(anyhow!("user aborted"));
-            }
-            copy_contents(root.join("xtask/src/simple"), project, true)?;
-
-            println!("scaffolded as a simple CLI only crate.");
-
-            Ok(())
-        }
-        Some(("dual", _)) => {
-            if exists(project.join("src/bin"))
-                && !confirm("this will overwrite existing contents. continue?")
-            {
-                return Err(anyhow!("user aborted"));
-            }
-
-            remove_file(project.join("src/main.rs"))?;
-            copy_contents(root.join("xtask/src/dual"), project, true)?;
-
-            println!("scaffolded as a dual crate.");
 
             Ok(())
         }

@@ -1,14 +1,20 @@
+#![allow(clippy::must_use_candidate)]
+
+use starter_project_simpler::data::CMD;
+use starter_project_simpler::runner;
+
 use anyhow::Result as AnyResult;
 use clap::crate_version;
 use clap::{Arg, ArgMatches, Command};
 use console::style;
 use std::process::exit;
+
 pub const BANNER: &str = r#"
     B A N N E R
 "#;
 
 pub fn command() -> Command<'static> {
-    Command::new("bumblefoot")
+    Command::new("starter_project")
         .version(env!("VERGEN_GIT_SEMVER"))
         .version(crate_version!())
         .about("A starter project for Rust")
@@ -43,10 +49,16 @@ pub fn command() -> Command<'static> {
         )
 }
 
-pub fn run(matches: &ArgMatches) -> AnyResult<bool> {
+/// Run
+///
+/// # Errors
+///
+/// This function will return an error
+#[allow(clippy::unnecessary_wraps)]
+fn run(matches: &ArgMatches) -> AnyResult<bool> {
     log::info!("default cmd {:?}", matches.value_of("reporter"));
-    println!("going to run {}", bumblefoot::CMD);
-    bumblefoot::run();
+    println!("going to run {}", CMD);
+    runner::run();
     Ok(true)
 }
 
@@ -58,7 +70,7 @@ fn main() {
     let app = command();
 
     let v = app.render_version();
-    let matches = app.to_owned().get_matches();
+    let matches = app.clone().get_matches();
 
     if !matches.is_present("no_banner") {
         println!(
@@ -67,6 +79,9 @@ fn main() {
             style(v).dim()
         );
     }
+
+    // actual logic is in 'run'.
+    // subcommand is an error, but you can swap it later if you bring in subcommands
     let res = match matches.subcommand() {
         None => run(&matches),
         _ => Ok(false),

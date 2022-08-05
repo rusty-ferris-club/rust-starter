@@ -9,9 +9,9 @@ on:
     ## - release
 
 env:
-  BIN_NAME: bumblefoot
-  PROJECT_NAME: bumblefoot
-  REPO_NAME: jondot/bumblefoot
+  BIN_NAME: starter_project
+  PROJECT_NAME: starter_project
+  REPO_NAME: jondot/starter_project
   BREW_TAP: jondot/homebrew-tap
 
 jobs:
