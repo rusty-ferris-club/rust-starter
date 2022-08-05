@@ -12,7 +12,6 @@ use std::{
     path::{Path, PathBuf},
 };
 
-const TEMPLATE_PROJECT_NAME: &str = "starter_project";
 fn main() -> Result<(), anyhow::Error> {
     let cli = Command::new("xtask")
         .setting(AppSettings::SubcommandRequiredElseHelp)
@@ -30,7 +29,6 @@ fn main() -> Result<(), anyhow::Error> {
     let matches = cli.get_matches();
 
     let root = root_dir();
-    let project = root.join(TEMPLATE_PROJECT_NAME);
     let res = match matches.subcommand() {
         Some(("coverage", sm)) => {
             remove_dir("coverage")?;
@@ -90,7 +88,6 @@ fn main() -> Result<(), anyhow::Error> {
             Ok(())
         }
         Some(("vars", _)) => {
-            println!("project root: {:?}", project);
             println!("root: {:?}", root);
             Ok(())
         }
