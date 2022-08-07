@@ -25,6 +25,17 @@ cargo build
 
 * find where `starter_project` is and replace it with the name of your project. `$ rg starter_project`, `find . | grep starter_project`.
   
+Update all snapshots:
+
+```
+$ cargo insta test
+```
+And then
+
+```
+$ cargo insta review
+````
+
 
 ## Workflow
 ### Build
