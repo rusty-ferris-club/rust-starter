@@ -1,4 +1,5 @@
 #![allow(clippy::must_use_candidate)]
+// #![warn(missing_docs)] // uncomment for docs
 mod data;
 use data::Foobar;
 

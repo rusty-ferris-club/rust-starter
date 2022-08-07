@@ -25,7 +25,8 @@ fn main() -> Result<(), anyhow::Error> {
             ),
         )
         .subcommand(Command::new("vars"))
-        .subcommand(Command::new("ci"));
+        .subcommand(Command::new("ci"))
+        .subcommand(Command::new("docs"));
     let matches = cli.get_matches();
 
     let root = root_dir();
@@ -95,6 +96,11 @@ fn main() -> Result<(), anyhow::Error> {
             cmd!("cargo", "+nightly", "fmt", "--all", "--", "--check").run()?;
             cmd!("cargo", "clippy", "--", "-D", "warnings").run()?;
             cmd!("cargo", "test").run()?;
+            cmd!("cargo", "test", "--doc").run()?;
+            Ok(())
+        }
+        Some(("docs", _)) => {
+            cmd!("cargo", "watch", "-s", "cargo doc --no-deps").run()?;
             Ok(())
         }
         _ => unreachable!("unreachable branch"),

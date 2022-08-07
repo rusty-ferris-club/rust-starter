@@ -1,4 +1,5 @@
 #![allow(clippy::missing_const_for_fn)]
+// #![warn(missing_docs)] // uncomment for docs
 
 mod data;
 mod runner;
