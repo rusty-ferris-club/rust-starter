@@ -3,6 +3,15 @@ name = "starter_project_lib"
 version = "1.0.0"
 edition = "2021"
 
+# description = "..."
+# authors = ["... <...>"]
+# documentation = "https://docs.rs/..."
+# repository = "..."
+# categories = ["...", "..."]
+# keywords = ["...", "..."]
+# license = "Apache-2.0"
+# readme = "../README.md"
+
 [dependencies]
 serde = "1"
 serde_json = "1"
