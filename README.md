@@ -14,7 +14,7 @@ Then,
 * Remove the crates you don't need. You can pick from:
   * **`starter_project/`** - a full CLI with subcommands
   * **`starter_project_simpler/`** - a CLI with a simple flat structure
-  * **`starter_project_lib/`** - a library only starter project, slim and lean
+  * **`starter_project_lib/`** - a library only starter project, minimal dependencies
 * Update `cargo.toml` and remove crates from workspace
 
 Run build to see that you're ready to start:
