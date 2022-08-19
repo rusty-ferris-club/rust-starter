@@ -7,6 +7,6 @@ edition = "2021"
 
 [dependencies]
 
-xtaskops = "^0.1.0"
+xtaskops = "^0.2.0"
 anyhow = "1"
 clap = "3"

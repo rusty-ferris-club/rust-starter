@@ -59,6 +59,12 @@ If you like, you can replace this file with a README from the sub-crates:
 
 Workflow for your future project is based on `xtask`.
 
+Install the helper cargo tools with:
+
+```
+$ cargo xtask install
+```
+
 ## Build
 
 ```
