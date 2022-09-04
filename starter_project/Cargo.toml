@@ -2,7 +2,6 @@
 name = "starter_project"
 version = "1.0.0"
 edition = "2021"
-build = "build.rs"
 
 
 #
@@ -32,10 +31,6 @@ log = "^0.4.17"
 anyhow = "1"
 console = "^0.15.0"
 exitcode = "^1.1.2"
-
-[build-dependencies]
-vergen = "7"
-anyhow = "1"
 
 
 [features]

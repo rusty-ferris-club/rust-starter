@@ -5,7 +5,6 @@ use starter_project;
 
 pub fn command() -> Command<'static> {
     Command::new("starter_project")
-        .version(env!("VERGEN_GIT_SEMVER"))
         .version(crate_version!())
         .about("A starter project for Rust")
         .arg(
