@@ -1,7 +1,8 @@
 // use anyhow::anyhow;
 // use anyhow::Result as AnyResult;
-use serde_derive::{Deserialize, Serialize};
 use std::collections::HashMap;
+
+use serde_derive::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Definitions {
@@ -12,9 +13,10 @@ pub const CMD: &str = r#"hello"#;
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use insta::assert_yaml_snapshot;
     use pretty_assertions::assert_eq;
+
+    use super::*;
 
     #[test]
     fn test_foo() {

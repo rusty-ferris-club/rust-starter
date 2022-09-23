@@ -1,8 +1,7 @@
 #![allow(dead_code)]
 
 use clap::{AppSettings, Arg, Command};
-use xtaskops::ops;
-use xtaskops::tasks;
+use xtaskops::{ops, tasks};
 
 fn main() -> Result<(), anyhow::Error> {
     let cli = Command::new("xtask")

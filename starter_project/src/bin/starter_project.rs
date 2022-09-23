@@ -2,8 +2,9 @@
 #![allow(clippy::missing_const_for_fn)]
 
 mod cmd;
-use console::{style, Style};
 use std::process::exit;
+
+use console::{style, Style};
 
 const DEFAULT_ERR_EXIT_CODE: i32 = 1;
 pub const BANNER: &str = r#"
