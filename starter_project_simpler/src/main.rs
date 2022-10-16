@@ -1,13 +1,11 @@
 #![allow(clippy::must_use_candidate)]
 
-use starter_project_simpler::data::CMD;
-use starter_project_simpler::runner;
+use std::process::exit;
 
 use anyhow::Result as AnyResult;
-use clap::crate_version;
-use clap::{Arg, ArgMatches, Command};
+use clap::{crate_version, Arg, ArgMatches, Command};
 use console::style;
-use std::process::exit;
+use starter_project_simpler::{data::CMD, runner};
 
 pub const BANNER: &str = r#"
     B A N N E R

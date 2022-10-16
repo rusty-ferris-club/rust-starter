@@ -7,9 +7,10 @@ pub struct Foobar {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use insta::assert_yaml_snapshot;
     use pretty_assertions::assert_eq;
+
+    use super::*;
 
     #[test]
     fn test_foo() {

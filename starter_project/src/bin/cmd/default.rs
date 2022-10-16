@@ -1,6 +1,5 @@
 use anyhow::Result;
-use clap::crate_version;
-use clap::{Arg, ArgMatches, Command};
+use clap::{crate_version, Arg, ArgMatches, Command};
 use starter_project;
 
 pub fn command() -> Command<'static> {
