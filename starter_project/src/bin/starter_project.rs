@@ -4,6 +4,11 @@
 mod cmd;
 use console::{style, Style};
 use std::process::exit;
+use tracing::debug;
+use tracing::metadata::LevelFilter;
+use tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt;
+use tracing_subscriber::util::SubscriberInitExt;
+use tracing_subscriber::{EnvFilter, Registry};
 
 const DEFAULT_ERR_EXIT_CODE: i32 = 1;
 pub const BANNER: &str = r#"
@@ -14,28 +19,41 @@ fn main() {
     let app = cmd::default::command().subcommand(cmd::validate::command());
 
     let v = app.render_version();
-    let matches = app.clone().get_matches();
+    let matches = app.get_matches();
 
-    let env = env_logger::Env::default().filter_or(
-        "LOG",
-        matches.value_of("log").unwrap_or(log::Level::Info.as_str()),
-    );
-    env_logger::init_from_env(env);
+    let level = if matches.get_flag("verbose") {
+        LevelFilter::INFO
+    } else {
+        LevelFilter::OFF
+    };
 
-    if !matches.is_present("no_banner") {
+    // set up tracing.
+    // use info! or trace! etc. to log
+    // to instrument use `#[tracing::instrument(level = "trace", skip(session), err)]`
+    Registry::default()
+        .with(tracing_tree::HierarchicalLayer::new(2))
+        .with(
+            EnvFilter::builder()
+                .with_default_directive(level.into())
+                .with_env_var("LOG")
+                .from_env_lossy(),
+        )
+        .init();
+
+    if !matches.get_flag("no_banner") {
         println!(
             "{}\n                    {}",
             style(BANNER).magenta(),
             style(v).dim()
         );
     }
-    let res = match matches.subcommand() {
-        None => cmd::default::run(&matches),
-        Some(tup) => match tup {
+    let res = matches.subcommand().map_or_else(
+        || cmd::default::run(&matches),
+        |tup| match tup {
             ("validate", subcommand_matches) => cmd::validate::run(&matches, subcommand_matches),
             _ => unreachable!(),
         },
-    };
+    );
 
     let exit_with = match res {
         Ok(cmd) => {
@@ -50,7 +68,7 @@ fn main() {
             cmd.code
         }
         Err(e) => {
-            log::debug!("{:?}", e);
+            debug!("{:?}", e);
             DEFAULT_ERR_EXIT_CODE
         }
     };

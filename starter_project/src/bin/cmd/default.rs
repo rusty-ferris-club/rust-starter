@@ -1,9 +1,10 @@
 use anyhow::Result;
-use clap::crate_version;
+use clap::{crate_version, ArgAction};
 use clap::{Arg, ArgMatches, Command};
 use starter_project;
+use tracing::info;
 
-pub fn command() -> Command<'static> {
+pub fn command() -> Command {
     Command::new("starter_project")
         .version(crate_version!())
         .about("A starter project for Rust")
@@ -12,45 +13,32 @@ pub fn command() -> Command<'static> {
                 .short('d')
                 .long("dry-run")
                 .value_name("EXAMPLE_KEY")
-                .help("Dry run with examples given in EXAMPLE_KEY")
-                .takes_value(true),
+                .help("Dry run with examples given in EXAMPLE_KEY"),
         )
         .arg(
             Arg::new("reporter")
                 .short('r')
                 .long("reporter")
                 .value_name("REPORTER")
-                .takes_value(true)
-                .possible_values(&["console"])
+                .value_parser(["console"])
                 .help("Reporter to use (default: 'console')"),
         )
         .arg(
             Arg::new("no_banner")
                 .long("no-banner")
                 .help("Don't show the banner")
-                .takes_value(false),
+                .action(ArgAction::SetTrue),
         )
         .arg(
-            Arg::new("log")
-                .long("log")
-                .help("Set logging level")
-                .value_name("LEVEL")
-                .possible_values(vec![
-                    log::LevelFilter::Off.as_str(),
-                    log::LevelFilter::Trace.as_str(),
-                    log::LevelFilter::Debug.as_str(),
-                    log::LevelFilter::Info.as_str(),
-                    log::LevelFilter::Warn.as_str(),
-                    log::LevelFilter::Error.as_str(),
-                ])
-                .default_value(log::Level::Info.as_str())
-                .ignore_case(true)
-                .takes_value(true),
+            Arg::new("verbose")
+                .long("verbose")
+                .help("Show details about interactions")
+                .action(ArgAction::SetTrue),
         )
 }
 
 pub fn run(matches: &ArgMatches) -> Result<starter_project::CmdExit> {
-    log::info!("default cmd {:?}", matches.value_of("reporter"));
+    info!("default cmd {:?}", matches.get_one::<String>("reporter"));
     println!("going to run {}", starter_project::CMD);
     starter_project::run();
     Ok(starter_project::CmdExit {
