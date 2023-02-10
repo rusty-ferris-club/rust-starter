@@ -3,6 +3,10 @@ name = "starter_project_simpler"
 version = "1.0.0"
 edition = "2021"
 
+[[bin]]
+name = "starter_project_simpler"
+path = "src/bin/main.rs"
+
 [dependencies]
 
 clap = { version = "4", features = ["cargo", "derive"] }

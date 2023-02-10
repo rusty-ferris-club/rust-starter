@@ -1,11 +1,6 @@
-#![allow(clippy::must_use_candidate)]
-
-use regex::Regex;
-use starter_project_simpler::data::CMD;
-use starter_project_simpler::runner;
-
-use anyhow::Result as AnyResult;
+use anyhow::Result;
 use clap::{ArgAction, Parser};
+use regex::Regex;
 use std::process::exit;
 use tracing::metadata::LevelFilter;
 use tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt;
@@ -15,51 +10,37 @@ use tracing_subscriber::{EnvFilter, Registry};
 /// Zip eXtract: Unpack any archive
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
-struct Opts {
+pub struct Opts {
     /// any kind of archive
     #[arg(value_name = "ARCHIVE")]
-    archive: String,
+    pub archive: String,
 
     /// where to output extracted content
     #[arg(value_name = "OUT_DIR")]
-    out_dir: String,
+    pub out_dir: String,
 
     /// strip N number of components from the path of extracted files
     #[arg(short, long, value_name = "NUM", default_value = "0")]
-    strip: Option<usize>,
+    pub strip: Option<usize>,
 
     /// only matching files will be extracted
     #[arg(short, long, value_name = "REGEX")]
-    filter: Option<Regex>,
+    pub filter: Option<Regex>,
 
     /// list files in archive (don't extract)
     #[arg(short, long, action=ArgAction::SetTrue)]
-    list: bool,
+    pub list: bool,
 
     /// list with metadata (don't extract)
     #[arg(long, action=ArgAction::SetTrue)]
-    ls: bool,
+    pub ls: bool,
 
     /// list with metadata (don't extract)
     #[arg(long, action=ArgAction::SetTrue)]
-    verbose: bool,
+    pub verbose: bool,
 }
 
-/// Run
-///
-/// # Errors
-///
-/// This function will return an error
-#[allow(clippy::unnecessary_wraps)]
-fn run(opts: &Opts) -> AnyResult<bool> {
-    log::info!("strip: {:?}", opts.strip);
-    println!("going to run {CMD}");
-    runner::run();
-    Ok(true)
-}
-
-fn main() {
-    let opts = Opts::parse();
+pub fn tracing(opts: &Opts) {
     let level = if opts.verbose {
         LevelFilter::INFO
     } else {
@@ -78,8 +59,10 @@ fn main() {
                 .from_env_lossy(),
         )
         .init();
+}
 
-    match run(&opts) {
+pub fn exit_result(res: &Result<bool>) {
+    match res {
         Ok(ok) => {
             exit(i32::from(!ok));
         }
