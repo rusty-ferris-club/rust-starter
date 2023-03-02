@@ -4,8 +4,8 @@
 
 $ErrorActionPreference = 'Stop'
 
-$Project = "starter_project"
-$Repo = "rusty-ferris-club/rust-starter"
+$Project = "__V_PROJECT_NAME__"
+$Repo = "__V_REPO_NAME__"
 
 if ($v) {
   $Version = "v${v}"

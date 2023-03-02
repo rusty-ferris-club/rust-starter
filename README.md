@@ -37,6 +37,7 @@ cargo build
 ### Personalising
 
 Find where `starter_project` is and replace it with the name of your project. `$ rg starter_project`, `find . | grep starter_project`.
+Find which variables you need to swap. `$ rg __V_`, `$ rg __v_`.
   
 Update all snapshots:
 

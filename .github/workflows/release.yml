@@ -14,9 +14,9 @@ on:
 
 # 2. fill these in and you're done.
 env:
-  BIN_NAME: starter_project
-  PROJECT_NAME: starter_project
-  REPO_NAME: jondot/starter_project
+  BIN_NAME: __V_BIN_NAME__
+  PROJECT_NAME: __V_PROJECT_NAME__
+  REPO_NAME: __V_REPO_NAME__
 
 jobs:
   dist:

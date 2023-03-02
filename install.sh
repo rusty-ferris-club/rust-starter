@@ -6,9 +6,9 @@
 set -e
 
 # assumes bin name same as project name
-project="starter_project"
-bin_name="starter_project"
-repo="rusty-ferris-club/rust-starter"
+project="__V_PROJECT_NAME__"
+bin_name="__V_BIN_NAME__"
+repo="__V_REPO_NAME__"
 
 if [ "$OS" = "Windows_NT" ]; then
 	target="x86_64-windows"
