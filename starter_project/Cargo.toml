@@ -18,6 +18,38 @@ edition = "2021"
 # 2. For a library, build using `--no-default-features`, and depend using `default-features = false`
 #
 
+# swaps:
+# __BIN_NAME__ (e.g. 'zip')
+# __PROJECT_NAME__ (e.g. 'zipper', mostly identical to __BIN_NAME__)
+#
+#
+
+
+#
+# cargo binstall metadata:
+#
+
+[package.metadata.binstall.overrides.x86_64-pc-windows-msvc]
+pkg-url = "{ repo }/releases/download/v{ version }/__PROJECT_NAME__-x86_64-windows.zip"
+bin-dir = "__PROJECT_NAME__-x86_64-windows/__BIN_NAME__.exe"
+pkg-fmt = "zip"
+
+[package.metadata.binstall.overrides.x86_64-apple-darwin]
+pkg-url = "{ repo }/releases/download/v{ version }/__PROJECT_NAME__-x86_64-macos.tar.xz"
+bin-dir = "__PROJECT_NAME__-x86_64-macos/__BIN_NAME__"
+pkg-fmt = "txz"
+
+[package.metadata.binstall.overrides.aarch64-apple-darwin]
+pkg-url = "{ repo }/releases/download/v{ version }/__PROJECT_NAME__-aarch64-macos.tar.xz"
+bin-dir = "__PROJECT_NAME__-x86_64-macos/__BIN_NAME__"
+pkg-fmt = "txz"
+
+[package.metadata.binstall.overrides.x86_64-unknown-linux-gnu]
+pkg-url = "{ repo }/releases/download/v{ version }/__PROJECT_NAME__-x86_64-linux.tar.xz"
+bin-dir = "__PROJECT_NAME__-x86_64-linux/__BIN_NAME__"
+pkg-fmt = "txz"
+
+# </cargo binstall>
 
 [dependencies]
 
@@ -40,5 +72,7 @@ default = ["cli"]
 cli = ["clap"]
 
 [[bin]]
-name = "starter_project"
+name = "__bin_name__"
+path = "src/bin/main.rs"
+
 required-features = ["cli"]

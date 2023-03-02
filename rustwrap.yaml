@@ -1,0 +1,36 @@
+# __VERSION__ should stay the same, do not replace.
+# replace:
+# __BIN_NAME__, __PROJECT_NAME__, __TAP_NAME__, __PROJECT_FORMULA__
+
+targets:
+  - platform: win32
+    arch: x64
+    url_template: https://github.com/__REPO_NAME__/releases/download/v__VERSION__/__PROJECT_NAME__-x86_64-windows.zip
+  - platform: linux
+    arch: x64
+    url_template: https://github.com/__REPO_NAME__/releases/download/v__VERSION__/__PROJECT_NAME__-x86_64-linux.tar.xz
+  - platform: darwin
+    arch: x64
+    url_template: https://github.com/__REPO_NAME__/releases/download/v__VERSION__/__PROJECT_NAME__-x86_64-macos.tar.xz
+  - platform: darwin
+    arch: arm64
+    url_template: https://github.com/__REPO_NAME__/releases/download/v__VERSION__/__PROJECT_NAME__-aarch64-macos.tar.xz
+
+brew:
+  name: __PROJECT_NAME__ 
+  publish: true
+  tap: __TAP_NAME__
+  recipe_fname: __PROJECT_NAME__.rb
+  recipe_template: |
+    class __PROJECT_FORMULA__ < Formula
+      desc "desc"
+      homepage "http://github.com/__REPO_NAME__"
+      url "__URL__"
+      version "__VERSION__"
+      sha256 "__SHA__"
+
+      def install
+        bin.install "__BIN_NAME__"
+      end
+    end
+

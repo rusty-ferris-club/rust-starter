@@ -3,25 +3,63 @@ name = "starter_project_simpler"
 version = "1.0.0"
 edition = "2021"
 
+# swaps (lowercase as well):
+# __BIN_NAME__ (e.g. 'zip')
+# __PROJECT_NAME__ (e.g. 'zipper', mostly identical to __BIN_NAME__)
+#
+#
+
+
+#
+# cargo binstall metadata:
+#
+
+[package.metadata.binstall.overrides.x86_64-pc-windows-msvc]
+pkg-url = "{ repo }/releases/download/v{ version }/__PROJECT_NAME__-x86_64-windows.zip"
+bin-dir = "__PROJECT_NAME__-x86_64-windows/__BIN_NAME__.exe"
+pkg-fmt = "zip"
+
+[package.metadata.binstall.overrides.x86_64-apple-darwin]
+pkg-url = "{ repo }/releases/download/v{ version }/__PROJECT_NAME__-x86_64-macos.tar.xz"
+bin-dir = "__PROJECT_NAME__-x86_64-macos/__BIN_NAME__"
+pkg-fmt = "txz"
+
+[package.metadata.binstall.overrides.aarch64-apple-darwin]
+pkg-url = "{ repo }/releases/download/v{ version }/__PROJECT_NAME__-aarch64-macos.tar.xz"
+bin-dir = "__PROJECT_NAME__-x86_64-macos/__BIN_NAME__"
+pkg-fmt = "txz"
+
+[package.metadata.binstall.overrides.x86_64-unknown-linux-gnu]
+pkg-url = "{ repo }/releases/download/v{ version }/__PROJECT_NAME__-x86_64-linux.tar.xz"
+bin-dir = "__PROJECT_NAME__-x86_64-linux/__BIN_NAME__"
+pkg-fmt = "txz"
+
+# </cargo binstall>
+
 [[bin]]
-name = "starter_project_simpler"
-path = "src/bin/main.rs"
+name = "__bin_name__"
+path = "src/main.rs"
+required-features = ["cli"]
+
+[features]
+cli = ["dep:eyre"]
+default = ["cli"]
 
 [dependencies]
 
-clap = { version = "4", features = ["cargo", "derive"] }
+eyre = { version = "0.6.8", optional = true }
+argh = "0.1.10"
 regex = "1.7.0"
 serde = "1"
 serde_json = "1"
 serde_derive = "1"
 serde_yaml = "^0.9.0"
 log = "^0.4.17"
-anyhow = "1"
 console = "^0.15.0"
 
-tracing = "^0.1.34"
-tracing-tree = { version = "0.2.1" }
-tracing-subscriber = { version = "^0.3.11", features = ["env-filter"] }
+# tracing = "^0.1.34"
+# tracing-tree = { version = "0.2.1" }
+# tracing-subscriber = { version = "^0.3.11", features = ["env-filter"] }
 
 [dev-dependencies]
 insta = { version = "1.17.1", features = ["backtrace", "redactions"] }

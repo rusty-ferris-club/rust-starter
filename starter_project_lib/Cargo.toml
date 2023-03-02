@@ -3,10 +3,10 @@ name = "starter_project_lib"
 version = "1.0.0"
 edition = "2021"
 
-# description = "..."
-# authors = ["... <...>"]
-# documentation = "https://docs.rs/..."
-# repository = "..."
+# description = "__DESCRIPTION__"
+# authors = ["__AUTHOR__"]
+# documentation = "https://docs.rs/__PROJECT_NAME__"
+# repository = "__REPO_URL__"
 # categories = ["...", "..."]
 # keywords = ["...", "..."]
 # license = "Apache-2.0"
