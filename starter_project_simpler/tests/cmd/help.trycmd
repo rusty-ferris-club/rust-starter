@@ -1,0 +1,17 @@
+```console
+$ __V_BIN_NAME__ --help
+Usage: __V_BIN_NAME__ [<task>] [-l] [-p <path>] [-i]
+
+example: foobar
+
+Positional Arguments:
+  task              task to run
+
+Options:
+  -l, --list        list tasks
+  -p, --path        root path (default ".")
+  -i, --init        init local config
+  --help            display usage information
+  -V, --version     print version information and exit
+
+```

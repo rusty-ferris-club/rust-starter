@@ -1,0 +1,87 @@
+#
+# get backpack: https://github.com/rusty-ferris-club/backpack
+# to add this project as a template, clone it and run `bp add`:
+#
+# $ git clone https://github.com/rusty-ferris-club/rust-starter
+# $ cd rust-starter
+# $ bp add
+#
+project:
+  shortlink: rusty-ferris-club/rust-starter
+  actions:
+    - name: project
+      interaction:
+        kind: input
+        prompt: project name (e.g. newtool)
+        out: project
+      hook: before
+    - name: bin
+      interaction:
+        kind: input
+        prompt: binary name (e.g. newtool)
+        out: bin
+      hook: before
+    - name: repo
+      interaction:
+        kind: input
+        prompt: repo name (e.g. jondot/newtool)
+        out: repo
+      hook: before
+    - name: url
+      interaction:
+        kind: input
+        prompt: "repo URL (e.g. https://github.com/jondot/newtool)"
+        out: url
+      hook: before
+    - name: formula
+      interaction:
+        kind: input
+        prompt: brew formula name (e.g. Newtool)
+        out: formula
+      hook: before
+    - name: tap
+      interaction:
+        kind: input
+        prompt: brew tap name (e.g. jondot/homebrew-tap)
+        out: tap
+      hook: before
+    - name: description
+      interaction:
+        kind: input
+        prompt: description (e.g. one liner)
+        out: description
+      hook: before
+    - name: author
+      interaction:
+        kind: input
+        prompt: author (e.g. you@example.com)
+        out: author
+      hook: before
+  swaps:
+    - key: __V_PROJECT_NAME__
+      val_template: "{{project}}"
+      path: ".*"
+    - key: __V_REPO_NAME__
+      val_template: "{{repo}}"
+      path: ".*"
+    - key: __V_REPO_URL__
+      val_template: "{{url}}"
+      path: ".*"
+    - key: __V_PROJECT_FORMULA__
+      val_template: "{{formula}}"
+      path: ".*"
+    - key: __V_TAP_NAME__
+      val_template: "{{tap}}"
+      path: ".*"
+    - key: __V_BIN_NAME__
+      val_template: "{{bin}}"
+      path: ".*"
+    - key: __v_bin_name__
+      val_template: "{{bin}}"
+      path: ".*"
+    - key: __V_AUTHOR__
+      val_template: "{{author}}"
+      path: ".*"
+    - key: __V_DESCRIPTION__
+      val_template: "{{description}}"
+      path: ".*"
