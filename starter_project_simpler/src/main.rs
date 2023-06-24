@@ -1,7 +1,7 @@
 mod argh_ext;
-use argh::FromArgs;
-
 use std::process::exit;
+
+use argh::FromArgs;
 
 /// example: foobar
 #[derive(Debug, FromArgs)]

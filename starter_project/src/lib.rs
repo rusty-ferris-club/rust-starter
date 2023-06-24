@@ -3,5 +3,6 @@
 
 mod data;
 mod runner;
-pub use self::runner::run;
 pub use data::{CmdExit, CMD};
+
+pub use self::runner::run;

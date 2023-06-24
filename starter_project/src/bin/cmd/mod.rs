@@ -1,12 +1,12 @@
 pub mod default;
 pub mod validate;
 use std::process::exit;
-use tracing::debug;
 
 use anyhow::Result;
 use clap::ArgMatches;
 use console::{style, Style};
 use starter_project::CmdExit;
+use tracing::debug;
 use tracing::metadata::LevelFilter;
 use tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
