@@ -42,8 +42,7 @@ where
                     };
                     Err(argh::EarlyExit {
                         output: format!(
-                            "{}  -V, --version     print version information and exit",
-                            help
+                            "{help}  -V, --version     print version information and exit",
                         ),
                         status: Ok(()),
                     })

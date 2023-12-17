@@ -12,9 +12,9 @@ use tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 use tracing_subscriber::{EnvFilter, Registry};
 
-pub const BANNER: &str = r#"
+pub const BANNER: &str = r"
     B A N N E R
-"#;
+";
 pub fn banner(v: &str, matches: &ArgMatches) {
     if !matches.get_flag("no_banner") {
         println!(

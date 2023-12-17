@@ -12,10 +12,6 @@ edition = "2021"
 # license = "Apache-2.0"
 # readme = "../README.md"
 
-[[example]]
-name = "demo"
-required-features = ["default"]
-
 [dependencies]
 serde = { version = "1", features = ["derive"] }
 # serde_json = "1"
@@ -24,7 +20,7 @@ serde = { version = "1", features = ["derive"] }
 # thiserror = "1"
 
 [dev-dependencies]
-insta = { version = "1.17.1", features = ["backtrace", "redactions"] }
+insta = { version = "1.17.1", features = ["yaml", "redactions"] }
 pretty_assertions = "1"
 clap = "4.1.8"
 # rstest = "^0.14.0"

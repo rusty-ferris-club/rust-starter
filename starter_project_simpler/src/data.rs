@@ -9,7 +9,7 @@ pub struct Definitions {
     pub providers: HashMap<String, String>,
 }
 
-pub const CMD: &str = r#"hello"#;
+pub const CMD: &str = r"hello";
 
 #[cfg(test)]
 mod tests {
